@@ -14,7 +14,7 @@ const signToken = (id) => {
     })
 }
 
-const createAndSendToken = (user, statusCode, res) => {
+const createAndSendToken = (user, statusCode, req, res) => {
     const token = signToken(user._id) // The _id property is the _id of the user document object that was created automatically by mongoose
 
     const cookieOptions = {
@@ -23,9 +23,13 @@ const createAndSendToken = (user, statusCode, res) => {
             //timestamp of now + 90days in ms
             Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
         ),
+        secure: req.secure || req.header['x-forwarded-proto'] === 'https',
     }
-
-    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true
+    // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true //The problem with this is that the fact that we are in production doesn't mean that our connection is secure because not all deployed applications are automatically set to https. hence why we use the code below instead
+    // if (req.secure || req.headers['x-forwarded-proto'] === 'https') {
+    //     //The req object has the secure property by default and only when the connection is secure will the req.secure be true but unfortunately in hosting platforms like heroku and render, this doesn't work and that's because the hosting platform proxy's basically redirect/modifies all incoming requests into our app before they actually reach our app. hence why we have check the (req.headers['x-forwarded-proto]==='https) before we secure our cookie properly. This is for explanation but it would add directly into the cookieOption object
+    //     cookieOptions.secure = true
+    // }
     res.cookie('jwt', token, cookieOptions)
 
     user.password = undefined // Omit the password property from being sent to the client
@@ -73,7 +77,7 @@ const signUp = catchAsync(async (req, res, next) => {
     //     },
     // })
 
-    createAndSendToken(newUser, 201, res)
+    createAndSendToken(newUser, 201, req, res)
 })
 
 // const sendWelcomeEmail = async (newUser, req) => {
@@ -120,7 +124,7 @@ const logIn = catchAsync(async (req, res, next) => {
     //     token,
     // })
 
-    createAndSendToken(user, 200, res)
+    createAndSendToken(user, 200, req, res)
 })
 
 const protect = catchAsync(async (req, res, next) => {
@@ -292,7 +296,7 @@ const resetPassword = catchAsync(async (req, res, next) => {
     //     token,
     // })
 
-    createAndSendToken(user, 200, res)
+    createAndSendToken(user, 200, req, res)
 })
 
 const updatePassword = catchAsync(async (req, res, next) => {
@@ -317,7 +321,7 @@ const updatePassword = catchAsync(async (req, res, next) => {
     //NB;- The Reasons we did not use User.findByIdAndUpdate() are: (1) The validators in the userSchema don't work when we use other methods that are not save() and create() , (2) The document middleware that we used earlier in the userModel to perform some actions before a document is saved won't work with findByIdAndUpdate()
 
     //(4) Log user in, send JWT
-    createAndSendToken(user, 200, res)
+    createAndSendToken(user, 200, req, res)
 })
 
 const restrictTo = (...roles) => {

@@ -23,6 +23,9 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 const app = express()
 
+//SECTION - Trust proxy(An extension of the solution of testing if our app is secure when deployed. as seen in the createAndSendToken func in authController)
+app.enable('trust proxy')
+
 //SECTION - Setting the template engine to be used by express
 app.set('view engine', 'pug')
 
