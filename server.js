@@ -41,6 +41,7 @@ async function connectMongoose() {
 
 connectMongoose()
 
+//NOTE - mandatory for some hosting platform
 const PORT = process.env.PORT || 3000
 
 const server = app.listen(PORT, () => {
