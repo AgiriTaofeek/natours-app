@@ -4,6 +4,14 @@ import Booking from '../models/bookingModel.js'
 import AppError from '../utils/appError.js'
 import catchAsync from '../utils/catchAsync.js'
 
+const alerts = (req, res, next) => {
+    const { alert } = req.query
+    if (alert) {
+        res.locals.alert = `Your booking was successful! Please check your email for a confirmation. If your booking doesn't show up here immediately, Please come back later.`
+    }
+    next()
+}
+
 const getOverview = catchAsync(async (req, res, next) => {
     //STEPS TO TAKE BEFORE SERVER SIDE RENDERING
     //(1) Get tour data from collection
@@ -109,4 +117,5 @@ export {
     getAccount,
     getMyTours,
     updateUserData,
+    alerts,
 }

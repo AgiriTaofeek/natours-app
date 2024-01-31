@@ -10,7 +10,9 @@ html(lang="en")
             //- The favicon files is also in the public and we gain access to it because we used the middleware app.use(express.static(path.join(__dirname, 'public'))) to serve static files
             link(rel="shortcut icon", href="/img/favicon.png", type="image/png")
             link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Lato:300,300i,700")
-    body 
+
+    //- We are adding this data attribute to the body depending on if we make a request via webhook because we want to display a message alert whenever a user makes a successful payment on stripe         
+    body(data-alert=`${alert?alert:''}`) 
         // HEADER
         include _header
 

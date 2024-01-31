@@ -7,10 +7,14 @@ import {
     updateUserData,
     getMyTours,
     getSignupForm,
+    alerts,
 } from '../controllers/viewController.js'
 import { isLoggedIn, protect } from '../controllers/authController.js'
 // import { createBookingCheckout } from '../controllers/bookingController.js'
 const router = express.Router()
+
+//Router to pickup the querystring from success_url of getCheckoutSession controller so that we can display an alert message to users. we are doing it here because '/my-tours' route is the base of where add the querystring
+router.use(alerts)
 
 // router.use(isLoggedIn) // We can use this before every other middleware in the stack because the isLoggedIn middleware does not send any error to the globalError middleware which would normally terminate the req-res cycle but we won't because of the protect controller for the /me route that needs to query the DB just like the loggedIn controller does
 router.route('/').get(isLoggedIn, getOverview)

@@ -1,10 +1,10 @@
 /* eslint-disable */
-export const showAlert = (type, msg) => {
+export const showAlert = (type, msg, time = 7) => {
     // type parameter is either success or error
     hideAlert() // Hide alert before showing just to be sure
     const markUp = `<div class='alert alert--${type}'>${msg}</div>`
     document.querySelector('body').insertAdjacentHTML('afterbegin', markUp) // the means that the markUp would be injected to as the 1st child element of the body element
-    setTimeout(hideAlert, 5000) //Hide alert after 5 secs
+    setTimeout(hideAlert, time * 1000) //Hide alert after 5 secs
 }
 export const hideAlert = () => {
     const el = document.querySelector('.alert')

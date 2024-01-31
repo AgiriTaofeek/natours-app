@@ -6,7 +6,7 @@ import { login, logout, signup } from './login'
 import { updateSettings } from './updateSettings'
 import { displayMap } from './mapBox'
 import { bookTour } from './stripe'
-
+import { showAlert } from './alerts'
 // console.log('Hello from parceljs')
 
 //NOTE - Select DOM elements
@@ -100,3 +100,7 @@ if (bookBtn) {
         bookTour(tourId)
     })
 }
+
+//NOTE - Alert message display on the body element
+const alertMessage = document.querySelector('body').dataset.alert
+if (alertMessage) showAlert('success', alertMessage, 20)
