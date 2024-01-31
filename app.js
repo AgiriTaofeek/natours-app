@@ -7,6 +7,7 @@ import hpp from 'hpp'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import compression from 'compression'
+import cors from 'cors'
 import * as url from 'url'
 import * as dotenv from 'dotenv'
 dotenv.config({ path: './config.env' })
@@ -34,6 +35,10 @@ app.set('views', path.join(__dirname, 'views'))
 
 //NOTE - Serving static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')))
+
+//NOTE - Implement CORS
+app.use(cors()) //Simple requests GET,POST
+app.options('*', cors()) // Non-simple requests PUT, PATCH,DELETE etc
 
 //SECTION - Built-in middleware
 // console.log('process env in app.js =>', process.env.NODE_ENV)

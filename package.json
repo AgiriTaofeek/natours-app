@@ -29,6 +29,7 @@
         "buffer": "^6.0.3",
         "compression": "^1.7.4",
         "cookie-parser": "^1.4.6",
+        "cors": "^2.8.5",
         "dotenv": "^16.3.1",
         "express": "^4.18.2",
         "express-mongo-sanitize": "^2.2.0",
@@ -57,6 +58,6 @@
         "regenerator-runtime": "^0.14.1"
     },
     "engines": {
-        "node": "^18"
+        "node": "^20"
     }
 }
