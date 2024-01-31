@@ -1,0 +1,27 @@
+doctype html
+html(lang="en")
+    head
+        block head
+            meta(charset="UTF-8")
+            meta(name="viewport", content="width=device-width, initial-scale=1.0")
+            title Natours | #{title}
+            //-This css file is in the public folder 
+            link(rel="stylesheet", href="/css/style.css")
+            //- The favicon files is also in the public and we gain access to it because we used the middleware app.use(express.static(path.join(__dirname, 'public'))) to serve static files
+            link(rel="shortcut icon", href="/img/favicon.png", type="image/png")
+            link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Lato:300,300i,700")
+    body 
+        // HEADER
+        include _header
+
+        // CONTENT
+        block content
+            h1 this is a placeholder heading
+
+        // FOOTER
+        include _footer
+        //- script(src='https://cdn.jsdelivr.net/npm/axios@1.6.5/dist/axios.min.js') 
+        //- script(src='/js/mapBox.js')
+        //- script(src='/js/login.js')
+        script(src='https://js.stripe.com/v3/') 
+        script(src='/js/bundle/index.js')
