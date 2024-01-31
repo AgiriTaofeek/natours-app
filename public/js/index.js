@@ -1,7 +1,7 @@
 /*eslint-disable */
 //NOTE - The core-js and regenerator-runtime/runtime packages are basically code that we need to be add to the final bundled js file to help polyfill the new JS features so that they would also work for older browsers
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
+// import 'core-js/stable'
+// import 'regenerator-runtime/runtime'
 import { login, logout, signup } from './login'
 import { updateSettings } from './updateSettings'
 import { displayMap } from './mapBox'
@@ -103,4 +103,7 @@ if (bookBtn) {
 
 //NOTE - Alert message display on the body element
 const alertMessage = document.querySelector('body').dataset.alert
-if (alertMessage) showAlert('success', alertMessage, 20)
+if (alertMessage) showAlert('success', alertMessage, 10)
+
+// "watch:js": "parcel watch ./public/js/index.js --dist-dir ./public/js/bundle --no-source-maps",
+// "build:js": "parcel build ./public/js/index.js --dist-dir ./public/js/bundle",
