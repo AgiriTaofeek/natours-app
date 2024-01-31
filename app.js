@@ -33,9 +33,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 //SECTION - Built-in middleware
 // console.log('process env in app.js =>', process.env.NODE_ENV)
-console.log('In app.js')
-console.log('----------------------')
-console.log(process.env.NODE_ENV)
+// console.log('In app.js')
+// console.log('----------------------')
+// console.log(process.env.NODE_ENV)
 
 //NOTE - Set HTTP headers to secure the application
 app.use(
