@@ -8,6 +8,7 @@ import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import compression from 'compression'
 import cors from 'cors'
+import bodyParser from 'body-parser'
 import * as url from 'url'
 import * as dotenv from 'dotenv'
 dotenv.config({ path: './config.env' })
@@ -19,6 +20,7 @@ import bookingRouter from './routes/bookingRoutes.js '
 import viewRouter from './routes/viewRoutes.js'
 import AppError from './utils/appError.js'
 import GlobalErrorHandler from './controllers/errorController.js'
+import { webhookCheckout } from './controllers/bookingController.js'
 import path from 'path'
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
@@ -82,6 +84,13 @@ const limiter = rateLimit({
 
 //NOTE - Apply the rate limiting middleware to all routes that starts with /api
 app.use('/api', limiter)
+
+//NOTE - Route for stripe webhook.The reason why we are specify the route here instead of the using the /booking route is because in the webhookCheckout controller function, when we receive the body from stripe the stripe function that we are going to use to read the body needs the body in a raw form i.e as a string not as JSON as we have specified below with app.use(express.json()) which converts the body that will get to the traditional /booking route in JSON format
+app.post(
+    '/webhook-checkout',
+    bodyParser.raw({ type: 'application/json' }),
+    webhookCheckout
+)
 
 //NOTE - Body parser that allows reading data from req.body and the limit option controls the maximum request body size. If this is a number, then the value specifies the number of bytes; if it is a string, the value is passed to the bytes library for parsing. Defaults to '100kb'.
 app.use(express.json({ limit: '10kb' }))
