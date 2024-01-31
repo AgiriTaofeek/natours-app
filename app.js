@@ -6,6 +6,7 @@ import xss from 'xss-clean'
 import hpp from 'hpp'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
+import compression from 'compression'
 import * as url from 'url'
 import * as dotenv from 'dotenv'
 dotenv.config({ path: './config.env' })
@@ -102,6 +103,9 @@ app.use(
         ],
     })
 )
+
+//NOTE - Compression middleware to compress our responses, so basically, whenever we send a text response to a client no matter if that's JSON or HTML code with compression package that text will be dramatically compressed. NB:- Doesn't compresses images and files generally
+app.use(compression())
 
 //SECTION - APPLICATION MIDDLEWARE
 

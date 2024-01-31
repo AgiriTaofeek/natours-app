@@ -7,7 +7,7 @@ import { updateSettings } from './updateSettings'
 import { displayMap } from './mapBox'
 import { bookTour } from './stripe'
 
-console.log('Hello from parceljs')
+// console.log('Hello from parceljs')
 
 //NOTE - Select DOM elements
 const mapBox = document.querySelector('#map')
@@ -62,7 +62,7 @@ if (userDataForm) {
         form.append('name', document.getElementById('name').value)
         form.append('email', document.getElementById('email').value)
         form.append('photo', document.getElementById('photo').files[0]) //This is the main reason we have use the formData() because we want the enctype to be set programmatically to multipart/form-data
-        console.log([...form.entries()]) //We have to it this way to see the arrays of array
+        // console.log([...form.entries()]) //We have to it this way to see the arrays of array
         updateSettings(form, 'data')
     })
 }

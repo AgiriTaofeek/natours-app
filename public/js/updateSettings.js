@@ -4,10 +4,14 @@ import { showAlert } from './alerts'
 // TO reuse this function for also updating the password let's make it receive two parameters i.e data and type. the type can be 'data' and 'password'
 const updateSettings = async (data, type) => {
     try {
+        // const url =
+        //     type === 'password'
+        //         ? 'http://localhost:3000/api/v1/users/updateMyPassword'
+        //         : 'http://localhost:3000/api/v1/users/updateMe'
         const url =
             type === 'password'
-                ? 'http://localhost:3000/api/v1/users/updateMyPassword'
-                : 'http://localhost:3000/api/v1/users/updateMe'
+                ? '/api/v1/users/updateMyPassword'
+                : '/api/v1/users/updateMe'
         const res = await axios({
             method: 'PATCH',
             url,

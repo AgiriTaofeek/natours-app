@@ -4,22 +4,23 @@
 //NOTE - With the help of parcel, we can hence, use the import from node_modules folder as below
 import axios from 'axios'
 import { showAlert } from './alerts'
-console.log('login js')
+// console.log('login js')
 
 //NOTE -  we are able to use these login.js file as a module because of bundling with Parcel.js
 export const login = async (email, password) => {
-    console.log(email, password)
+    // console.log(email, password)
     try {
         const res = await axios({
             method: 'POST',
-            url: 'http://localhost:3000/api/v1/users/login', // For development
+            // url: 'http://localhost:3000/api/v1/users/login', // For development
+            url: '/api/v1/users/login', // For production
             data: {
                 email,
                 password,
             },
         })
 
-        console.log(res)
+        // console.log(res)
         if (res.data.status === 'success') {
             showAlert('success', 'logged in successfully')
             setTimeout(() => {
@@ -35,7 +36,8 @@ export const signup = async (name, email, password, passwordConfirm) => {
     try {
         const response = await axios({
             method: 'POST',
-            url: 'http://localhost:3000/api/v1/users/signup',
+            // url: 'http://localhost:3000/api/v1/users/signup', //development
+            url: '/api/v1/users/signup', //Production
             data: {
                 name,
                 email,
@@ -59,7 +61,8 @@ export const logout = async () => {
     try {
         const res = await axios({
             method: 'GET',
-            url: 'http://localhost:3000/api/v1/users/logout', // For development
+            // url: 'http://localhost:3000/api/v1/users/logout', // For development
+            url: '/api/v1/users/logout', // For Production
         })
 
         // if (res.data.status === 'success') location.reload(true) // This would force a reload from the server not from the browser cache which might not be ideal but it's best to assign the route back to the /login route

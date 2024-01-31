@@ -1,7 +1,7 @@
 // import dotenv from 'dotenv'
 // dotenv.config({ path: './config.env' })
 // console.log('server process', dotenv.config({ path: './config.env' }))
-console.log('in the server.js')
+// console.log('in the server.js')
 // //NOTE - We need to do this before importing the app.js file because we want the process.env object to have the env data we specified in the config.env file before the proper app code starts to run
 
 import mongoose from 'mongoose'
@@ -44,7 +44,7 @@ connectMongoose()
 const PORT = process.env.PORT || 3000
 
 const server = app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}...`)
+    // console.log(`Server is running on port ${PORT}...`)
 })
 
 //NOTE - The process is the global object in Node.js that maintains track of and includes all of the information about the specific Node.js process that is running on the computer at the time. When a promise rejection is not handled, the unhandled rejection event is emitted. Node.js issues an UnhandledPromiseRejectionWarning to the terminal and promptly ends the process. The global Node.js process has an unhandled rejection event. This event is triggered when an unhandled rejection happens and there is no handler in the promise chain to handle it.

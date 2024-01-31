@@ -44,7 +44,7 @@ const getLoginForm = catchAsync(async (req, res, next) => {
     })
 })
 const getSignupForm = catchAsync(async (req, res, next) => {
-    console.log('signup')
+    // console.log('signup')
     res.status(200).render('signup', {
         title: 'Sign up an account ',
     })
